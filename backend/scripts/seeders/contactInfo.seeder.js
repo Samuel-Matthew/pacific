@@ -6,8 +6,7 @@ dotenv.config();
 
 export const seedContactInfo = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-    console.log("✓ Connected to MongoDB for seeding");
+    console.log("📝 Seeding contact information...");
 
     // Check if contact info already exists
     const existing = await ContactInfo.findOne();
@@ -15,7 +14,7 @@ export const seedContactInfo = async () => {
       console.log(
         "✓ Contact information already exists, skipping seed (existing data unchanged)",
       );
-      process.exit(0);
+      return;
     }
 
     // Create default contact info
@@ -34,11 +33,21 @@ export const seedContactInfo = async () => {
     console.log("  Telegram:", contactInfo.telegram);
     console.log("  Signal:", contactInfo.signal);
     console.log("  Phone:", contactInfo.phone);
-    process.exit(0);
   } catch (error) {
-    console.error("✗ Seeding error:", error.message);
-    process.exit(1);
+    console.error("✗ Contact info seeding error:", error.message);
+    throw error;
   }
 };
 
-seedContactInfo();
+// Allow running directly with: node contactInfo.seeder.js
+if (import.meta.url === `file://${process.argv[1]}`) {
+  try {
+    await mongoose.connect(process.env.MONGO_URI);
+    console.log("✓ Connected to MongoDB");
+    await seedContactInfo();
+    process.exit(0);
+  } catch (error) {
+    console.error("Error:", error);
+    process.exit(1);
+  }
+}
