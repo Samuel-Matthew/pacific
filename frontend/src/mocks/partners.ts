@@ -60,9 +60,9 @@ export const partners = [
     category: "Private Investor",
     initial: "HF",
     image:
-      // "https://storage.readdy-site.link/project_files/3e698f02-9883-47b4-93e0-18ccec99b6dc/8c1a2486-5837-4810-8dd0-fbdb6ea2e2a5_Hayden.jpg?v=1b0051739fe4ef1940eb03fa7e36bd48",
-      "hayden.jpeg",
-    netWorth: "$878K",
+      "https://storage.readdy-site.link/project_files/3e698f02-9883-47b4-93e0-18ccec99b6dc/8c1a2486-5837-4810-8dd0-fbdb6ea2e2a5_Hayden.jpg?v=1b0051739fe4ef1940eb03fa7e36bd48",
+    // "hayden.jpeg",
+    netWorth: "$59M",
     yearsOfPartnership: 7,
     testimonial:
       "Joining Pacific Crowns was one of the best financial decisions I have ever made. The quarterly returns have been consistent, and the team is always transparent and responsive. I have recommended this to several of my colleagues.",
@@ -202,10 +202,10 @@ export const partners = [
     image:
       // "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&h=400&fit=crop&crop=face",
       "lisa.jpeg",
-    netWorth: "$12.4M",
-    yearsOfPartnership: 4,
+    netWorth: "$8.2M",
+    yearsOfPartnership: 5,
     testimonial:
-      "Even as a newer partner, I have been impressed by the level of professionalism and the speed of returns. Pacific Crown Motors is the real deal.",
+      "Pacific Crown Motors stands out for their disciplined approach, transparent reporting, and consistent returns. Over four years, they've proven to be a reliable partner worthy of my continued investment.",
     title: "Partner & Venture Capitalist",
   },
 ];
