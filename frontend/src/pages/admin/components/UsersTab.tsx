@@ -88,120 +88,190 @@ export default function UsersTab() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
           <h2 className="text-white font-bold text-xl">Users</h2>
-          <p className="text-slate-400 text-sm">{total} total users</p>
+          <p className="text-white/60 text-sm">{total} total users</p>
         </div>
         {/* Filters */}
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-2 w-full sm:w-auto">
           <input
             type="text"
             placeholder="Search name / email…"
             value={search}
-            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-            className="bg-white/5 border border-white/10 text-white placeholder-slate-500 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-amber-500/50 transition-colors w-52"
+            onChange={(e) => {
+              setSearch(e.target.value);
+              setPage(1);
+            }}
+            className="bg-white/5 border border-white/10 text-white placeholder-white/40 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-amber-500 transition-colors w-full sm:w-52"
           />
           <select
             value={roleFilter}
-            onChange={(e) => { setRoleFilter(e.target.value); setPage(1); }}
-            className="bg-white/5 border border-white/10 text-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-amber-500/50 appearance-none cursor-pointer"
+            onChange={(e) => {
+              setRoleFilter(e.target.value);
+              setPage(1);
+            }}
+            className="bg-white/5 border border-white/10 text-white rounded-xl px-3 py-2 text-sm h-10 focus:outline-none focus:border-amber-500 appearance-none cursor-pointer"
           >
-            <option value="">All Roles</option>
-            {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
+            <option value="" className="bg-slate-900">
+              All Roles
+            </option>
+            {ROLES.map((r) => (
+              <option key={r} value={r} className="bg-slate-900">
+                {r}
+              </option>
+            ))}
           </select>
           <select
             value={statusFilter}
-            onChange={(e) => { setStatusFilter(e.target.value); setPage(1); }}
-            className="bg-white/5 border border-white/10 text-slate-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-amber-500/50 appearance-none cursor-pointer"
+            onChange={(e) => {
+              setStatusFilter(e.target.value);
+              setPage(1);
+            }}
+            className="bg-white/5 border border-white/10 text-white rounded-xl px-3 py-2 text-sm h-10 focus:outline-none focus:border-amber-500 appearance-none cursor-pointer"
           >
-            <option value="">All Statuses</option>
-            {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+            <option value="" className="bg-slate-900">
+              All Statuses
+            </option>
+            {STATUSES.map((s) => (
+              <option key={s} value={s} className="bg-slate-900">
+                {s}
+              </option>
+            ))}
           </select>
         </div>
       </div>
 
       {/* Table */}
-      <div className="rounded-2xl bg-white/5 border border-white/10 overflow-hidden">
+      <div className="rounded-2xl bg-slate-900/50 border border-white/10 overflow-hidden shadow-sm">
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full text-xs md:text-sm">
             <thead>
               <tr className="border-b border-white/10 bg-white/5">
-                <th className="text-left text-slate-400 font-medium px-5 py-3">User</th>
-                <th className="text-left text-slate-400 font-medium px-5 py-3">Role</th>
-                <th className="text-left text-slate-400 font-medium px-5 py-3">Status</th>
-                <th className="text-left text-slate-400 font-medium px-5 py-3">Joined</th>
-                <th className="text-left text-slate-400 font-medium px-5 py-3">Actions</th>
+                <th className="text-left text-white/70 font-medium px-2 md:px-5 py-2 md:py-3">
+                  User
+                </th>
+                <th className="text-left text-white/70 font-medium px-2 md:px-5 py-2 md:py-3 hidden md:table-cell">
+                  Role
+                </th>
+                <th className="text-left text-white/70 font-medium px-2 md:px-5 py-2 md:py-3 hidden md:table-cell">
+                  Status
+                </th>
+                <th className="text-left text-white/70 font-medium px-2 md:px-5 py-2 md:py-3">
+                  Joined
+                </th>
+                <th className="text-left text-white/70 font-medium px-2 md:px-5 py-2 md:py-3">
+                  Actions
+                </th>
               </tr>
             </thead>
             <tbody>
-              {loading
-                ? Array.from({ length: 6 }).map((_, i) => (
-                    <tr key={i} className="border-b border-white/5">
-                      {Array.from({ length: 5 }).map((__, j) => (
-                        <td key={j} className="px-5 py-4">
-                          <div className="h-4 rounded bg-white/10 animate-pulse" style={{ width: `${60 + Math.random() * 40}%` }} />
-                        </td>
-                      ))}
-                    </tr>
-                  ))
-                : users.length === 0
-                ? (
-                  <tr>
-                    <td colSpan={5} className="text-center text-slate-500 py-12">
-                      No users found
+              {loading ? (
+                Array.from({ length: 6 }).map((_, i) => (
+                  <tr key={i} className="border-b border-white/10">
+                    <td className="px-2 md:px-5 py-2 md:py-4">
+                      <div
+                        className="h-4 rounded bg-white/10 animate-pulse"
+                        style={{ width: `${60 + Math.random() * 40}%` }}
+                      />
+                    </td>
+                    <td className="px-2 md:px-5 py-2 md:py-4 hidden md:table-cell">
+                      <div
+                        className="h-4 rounded bg-white/10 animate-pulse"
+                        style={{ width: `${60 + Math.random() * 40}%` }}
+                      />
+                    </td>
+                    <td className="px-2 md:px-5 py-2 md:py-4 hidden md:table-cell">
+                      <div
+                        className="h-4 rounded bg-white/10 animate-pulse"
+                        style={{ width: `${60 + Math.random() * 40}%` }}
+                      />
+                    </td>
+                    <td className="px-2 md:px-5 py-2 md:py-4">
+                      <div
+                        className="h-4 rounded bg-white/10 animate-pulse"
+                        style={{ width: `${60 + Math.random() * 40}%` }}
+                      />
+                    </td>
+                    <td className="px-2 md:px-5 py-2 md:py-4">
+                      <div
+                        className="h-4 rounded bg-white/10 animate-pulse"
+                        style={{ width: `${60 + Math.random() * 40}%` }}
+                      />
                     </td>
                   </tr>
-                )
-                : users.map((u) => (
+                ))
+              ) : users.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="text-center text-white/40 py-12">
+                    No users found
+                  </td>
+                </tr>
+              ) : (
+                users.map((u) => (
                   <tr
                     key={u.id}
-                    className="border-b border-white/5 hover:bg-white/5 transition-colors group"
+                    className="border-b border-white/10 hover:bg-white/5 transition-colors group"
                   >
-                    <td className="px-5 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="w-9 h-9 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
+                    <td className="px-2 md:px-5 py-2 md:py-4">
+                      <div className="flex items-center gap-2 md:gap-3">
+                        <div className="w-8 h-8 md:w-9 md:h-9 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold text-xs md:text-sm flex-shrink-0">
                           {u.name?.charAt(0).toUpperCase()}
                         </div>
-                        <div>
-                          <p className="text-white font-medium leading-tight">{u.name}</p>
-                          <p className="text-slate-500 text-xs">{u.email}</p>
+                        <div className="min-w-0">
+                          <p className="text-white font-medium leading-tight text-xs md:text-sm truncate">
+                            {u.name}
+                          </p>
+                          <p className="text-white/50 text-xs hidden md:block">
+                            {u.email}
+                          </p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-5 py-4">
+                    <td className="px-2 md:px-5 py-2 md:py-4 hidden md:table-cell">
                       <select
                         value={u.role}
                         onChange={(e) => handleRoleChange(u.id, e.target.value)}
-                        className="bg-transparent border border-white/10 text-slate-300 rounded-lg px-2 py-1 text-xs cursor-pointer focus:outline-none focus:border-amber-500/50 hover:border-white/30 transition-colors"
+                        className="bg-white/5 border border-white/10 text-white rounded-lg px-2 py-1 text-xs h-8 cursor-pointer focus:outline-none focus:border-amber-500 hover:border-white/20 transition-colors"
                       >
-                        {ROLES.map((r) => <option key={r} value={r}>{r}</option>)}
+                        {ROLES.map((r) => (
+                          <option key={r} value={r} className="bg-slate-900">
+                            {r}
+                          </option>
+                        ))}
                       </select>
                     </td>
-                    <td className="px-5 py-4">
+                    <td className="px-2 md:px-5 py-2 md:py-4 hidden md:table-cell">
                       <select
                         value={u.status}
-                        onChange={(e) => handleStatusChange(u.id, e.target.value)}
-                        className="bg-transparent border border-white/10 text-slate-300 rounded-lg px-2 py-1 text-xs cursor-pointer focus:outline-none focus:border-amber-500/50 hover:border-white/30 transition-colors"
+                        onChange={(e) =>
+                          handleStatusChange(u.id, e.target.value)
+                        }
+                        className="bg-white/5 border border-white/10 text-white rounded-lg px-2 py-1 text-xs h-8 cursor-pointer focus:outline-none focus:border-amber-500 hover:border-white/20 transition-colors"
                       >
-                        {STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+                        {STATUSES.map((s) => (
+                          <option key={s} value={s} className="bg-slate-900">
+                            {s}
+                          </option>
+                        ))}
                       </select>
                     </td>
-                    <td className="px-5 py-4 text-slate-400 text-xs whitespace-nowrap">
+                    <td className="px-2 md:px-5 py-2 md:py-4 text-white/60 text-xs whitespace-nowrap\">
                       {new Date(u.createdAt).toLocaleDateString("en-GB", {
-                        day: "numeric", month: "short", year: "numeric",
+                        day: "numeric",
+                        month: "short",
+                        year: "numeric",
                       })}
                     </td>
-                    <td className="px-5 py-4">
+                    <td className="px-2 md:px-5 py-2 md:py-4\">
                       <button
                         onClick={() => setConfirmDelete(u)}
-                        className="text-slate-500 hover:text-red-400 transition-colors p-1.5 rounded-lg hover:bg-red-500/10"
+                        className="text-white/50 hover:text-red-400 transition-colors p-1.5 rounded-lg hover:bg-red-500/10 h-8 w-8 flex items-center justify-center"
                         title="Delete user"
                       >
-                        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                        </svg>
+                        <i className="ri-delete-bin-line\"></i>
                       </button>
                     </td>
                   </tr>
-                ))}
+                ))
+              )}
             </tbody>
           </table>
         </div>
@@ -209,21 +279,21 @@ export default function UsersTab() {
         {/* Pagination */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between px-5 py-4 border-t border-white/10">
-            <p className="text-slate-500 text-xs">
+            <p className="text-white/60 text-xs">
               Page {page} of {totalPages}
             </p>
             <div className="flex gap-2">
               <button
                 disabled={page === 1}
                 onClick={() => setPage((p) => p - 1)}
-                className="px-3 py-1.5 rounded-lg text-xs border border-white/10 text-slate-300 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="px-3 py-1.5 rounded-lg text-xs border border-white/10 text-white/70 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
                 ← Prev
               </button>
               <button
                 disabled={page === totalPages}
                 onClick={() => setPage((p) => p + 1)}
-                className="px-3 py-1.5 rounded-lg text-xs border border-white/10 text-slate-300 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="px-3 py-1.5 rounded-lg text-xs border border-white/10 text-white/70 hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
                 Next →
               </button>
@@ -236,22 +306,28 @@ export default function UsersTab() {
       {confirmDelete && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <div className="bg-slate-800 border border-white/10 rounded-2xl p-6 w-full max-w-sm shadow-2xl">
-            <div className="text-3xl mb-3">⚠️</div>
+            <div className="text-3xl mb-3">
+              <i className="ri-lg ri-error-warning-fill text-amber-400"></i>
+            </div>
             <h3 className="text-white font-bold text-lg mb-2">Delete User</h3>
-            <p className="text-slate-400 text-sm mb-6">
-              Are you sure you want to delete <span className="text-white font-medium">{confirmDelete.name}</span>? This action cannot be undone.
+            <p className="text-white/60 text-sm mb-6">
+              Are you sure you want to delete{" "}
+              <span className="text-white font-medium">
+                {confirmDelete.name}
+              </span>
+              ? This action cannot be undone.
             </p>
             <div className="flex gap-3">
               <button
                 onClick={() => setConfirmDelete(null)}
-                className="flex-1 px-4 py-2.5 rounded-xl border border-white/10 text-slate-300 hover:bg-white/5 transition-colors text-sm"
+                className="flex-1 px-4 py-2.5 rounded-xl border border-white/10 text-white hover:bg-white/5 transition-colors text-sm"
               >
                 Cancel
               </button>
               <button
                 onClick={() => handleDelete(confirmDelete.id)}
                 disabled={deleting === confirmDelete.id}
-                className="flex-1 px-4 py-2.5 rounded-xl bg-red-500 hover:bg-red-600 text-white font-semibold transition-colors text-sm disabled:opacity-60"
+                className="flex-1 px-4 py-2.5 rounded-xl bg-red-600/80 hover:bg-red-600 text-white font-semibold transition-colors text-sm disabled:opacity-60"
               >
                 {deleting === confirmDelete.id ? "Deleting…" : "Delete"}
               </button>

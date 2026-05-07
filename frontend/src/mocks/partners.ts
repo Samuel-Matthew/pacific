@@ -18,7 +18,8 @@ export const partners = [
     category: "Partner",
     initial: "SW",
     image:
-      "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face"
+      "sandraW.jpeg",
     netWorth: "$2.9M",
     yearsOfPartnership: 10,
     testimonial:
@@ -27,11 +28,12 @@ export const partners = [
   },
   {
     id: 3,
-    name: "Raymond Okafor",
+    name: "Raymond Olson",
     category: "Private Investor",
     initial: "RO",
     image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face"
+      "raymond.jpeg",
     netWorth: "$6.1M",
     yearsOfPartnership: 8,
     testimonial:
@@ -44,7 +46,8 @@ export const partners = [
     category: "Partner",
     initial: "CN",
     image:
-      "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face",
+      "christine.jpeg",
     netWorth: "$1.8M",
     yearsOfPartnership: 9,
     testimonial:
@@ -57,7 +60,8 @@ export const partners = [
     category: "Private Investor",
     initial: "HF",
     image:
-      "https://storage.readdy-site.link/project_files/3e698f02-9883-47b4-93e0-18ccec99b6dc/8c1a2486-5837-4810-8dd0-fbdb6ea2e2a5_Hayden.jpg?v=1b0051739fe4ef1940eb03fa7e36bd48",
+      // "https://storage.readdy-site.link/project_files/3e698f02-9883-47b4-93e0-18ccec99b6dc/8c1a2486-5837-4810-8dd0-fbdb6ea2e2a5_Hayden.jpg?v=1b0051739fe4ef1940eb03fa7e36bd48",
+      "hayden.jpeg",
     netWorth: "$878K",
     yearsOfPartnership: 7,
     testimonial:
@@ -70,7 +74,8 @@ export const partners = [
     category: "Partner",
     initial: "DF",
     image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+      "derek.jpeg",
     netWorth: "$3.4M",
     yearsOfPartnership: 11,
     testimonial:
@@ -83,7 +88,8 @@ export const partners = [
     category: "Private Investor",
     initial: "TB",
     image:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop&crop=face",
+      "tanya.jpeg",
     netWorth: "$1.5M",
     yearsOfPartnership: 5,
     testimonial:
@@ -96,7 +102,8 @@ export const partners = [
     category: "Partner",
     initial: "GH",
     image:
-      "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=400&h=400&fit=crop&crop=face",
+      "george.jpeg",
     netWorth: "$5.7M",
     yearsOfPartnership: 7,
     testimonial:
@@ -109,7 +116,8 @@ export const partners = [
     category: "Private Investor",
     initial: "PM",
     image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&h=400&fit=crop&crop=face",
+      "priya.jpeg",
     netWorth: "$920K",
     yearsOfPartnership: 6,
     testimonial:
@@ -122,7 +130,8 @@ export const partners = [
     category: "Partner",
     initial: "VC",
     image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+      "victor.jpeg",
     netWorth: "$7.3M",
     yearsOfPartnership: 8,
     testimonial:
@@ -131,11 +140,12 @@ export const partners = [
   },
   {
     id: 11,
-    name: "Natalie Osei",
+    name: "Nathan Osei",
     category: "Private Investor",
     initial: "NO",
     image:
-      "https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=400&h=400&fit=crop&crop=face",
+      "nathan.jpeg",
     netWorth: "$1.1M",
     yearsOfPartnership: 9,
     testimonial:
@@ -148,7 +158,8 @@ export const partners = [
     category: "Partner",
     initial: "JT",
     image:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face",
+      "james.jpeg",
     netWorth: "$9.8M",
     yearsOfPartnership: 10,
     testimonial:
@@ -157,11 +168,12 @@ export const partners = [
   },
   {
     id: 13,
-    name: "Angela Reeves",
+    name: "Jason Reeves",
     category: "Private Investor",
-    initial: "AR",
+    initial: "JR",
     image:
-      "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?w=400&h=400&fit=crop&crop=face",
+      "jason reeves.jpeg",
     netWorth: "$2.3M",
     yearsOfPartnership: 13,
     testimonial:
@@ -172,9 +184,24 @@ export const partners = [
     id: 14,
     name: "Thomas Beaumont",
     category: "Partner",
-    initial: "TB2",
+    initial: "TB",
     image:
-      "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&h=400&fit=crop&crop=face",
+      // "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&h=400&fit=crop&crop=face",
+      "thomas.jpeg",
+    netWorth: "$12.4M",
+    yearsOfPartnership: 4,
+    testimonial:
+      "Even as a newer partner, I have been impressed by the level of professionalism and the speed of returns. Pacific Crown Motors is the real deal.",
+    title: "Partner & Venture Capitalist",
+  },
+  {
+    id: 15,
+    name: "Lisa Kelly",
+    category: "Partner",
+    initial: "LK",
+    image:
+      // "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=400&h=400&fit=crop&crop=face",
+      "lisa.jpeg",
     netWorth: "$12.4M",
     yearsOfPartnership: 4,
     testimonial:

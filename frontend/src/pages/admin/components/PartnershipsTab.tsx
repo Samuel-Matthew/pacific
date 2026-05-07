@@ -240,35 +240,35 @@ export default function PartnershipsTab() {
           </button>
         </div>
       ) : applications.length === 0 ? (
-        <div className="bg-white/5 border border-white/10 rounded-lg p-8 text-center">
+        <div className="bg-slate-900/50 border border-gray-200 rounded-lg p-8 text-center">
           <i className="ri-inbox-line text-4xl text-white/40 mb-4 block"></i>
           <p className="text-white/60">No partnership applications yet.</p>
         </div>
       ) : (
-        <div className="bg-white/5 border border-white/10 rounded-lg shadow overflow-x-auto">
+        <div className="bg-slate-900/50 border border-gray-200 rounded-lg shadow overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-white/10 border-b border-white/10">
+            <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
-                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
-                  Partner Name
+                <th className="px-1 py-1 md:px-6 md:py-3 text-left text-xs font-bold text-gray-700 uppercase">
+                  Partner
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
+                <th className="px-1 py-1 md:px-6 md:py-3 text-left text-xs font-bold text-gray-700 uppercase hidden sm:table-cell">
                   Email
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
+                <th className="px-1 py-1 md:px-6 md:py-3 text-left text-xs font-bold text-gray-700 uppercase hidden md:table-cell">
                   Investment
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
-                  App Status
+                <th className="px-1 py-1 md:px-6 md:py-3 text-left text-xs font-bold text-gray-700 uppercase">
+                  App
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
-                  Payment Status
+                <th className="px-1 py-1 md:px-6 md:py-3 text-left text-xs font-bold text-gray-700 uppercase">
+                  Payment
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
+                <th className="px-1 py-1 md:px-6 md:py-3 text-left text-xs font-bold text-gray-700 uppercase hidden md:table-cell">
                   Date
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
-                  Actions
+                <th className="px-1 py-1 md:px-6 md:py-3 text-left text-xs font-bold text-gray-700 uppercase">
+                  Action
                 </th>
               </tr>
             </thead>
@@ -278,39 +278,52 @@ export default function PartnershipsTab() {
                   key={app._id}
                   className="hover:bg-white/5 transition-colors"
                 >
-                  <td className="px-6 py-4 text-sm font-semibold text-white">
+                  <td className="px-1 py-1 md:px-6 md:py-4 font-semibold text-white text-xs truncate max-w-xs md:max-w-none">
                     {app.partnerInfo.fullLegalName}
                   </td>
-                  <td className="px-6 py-4 text-sm text-white/60">
+                  <td className="px-1 py-1 md:px-6 md:py-4 text-white/60 text-xs truncate hidden sm:table-cell max-w-xs md:max-w-none">
                     {app.partnerInfo.email}
                   </td>
-                  <td className="px-6 py-4 text-sm font-bold text-amber-400">
+                  <td className="px-1 py-1 md:px-6 md:py-4 font-bold text-amber-400 text-xs hidden md:table-cell">
                     {formatCurrency(app.investmentAmount)}
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-1 py-1 md:px-6 md:py-4">
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border ${getStatusColor(app.applicationStatus)}`}
+                      className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded text-xs font-medium border ${getStatusColor(app.applicationStatus)}`}
                     >
-                      {app.applicationStatus}
+                      <span className="hidden sm:inline">
+                        {app.applicationStatus}
+                      </span>
+                      <span className="sm:hidden">
+                        {app.applicationStatus.charAt(0).toUpperCase()}
+                      </span>
                     </span>
                   </td>
-                  <td className="px-6 py-4">
+                  <td className="px-1 py-1 md:px-6 md:py-4">
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium border ${getPaymentStatusColor(app.paymentTracking.status)}`}
+                      className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded text-xs font-medium border ${getPaymentStatusColor(app.paymentTracking.status)}`}
                     >
-                      {app.paymentTracking.status.replace("_", " ")}
+                      <span className="hidden sm:inline">
+                        {app.paymentTracking.status.replace("_", " ")}
+                      </span>
+                      <span className="sm:hidden">
+                        {app.paymentTracking.status.charAt(0).toUpperCase()}
+                      </span>
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-white/60">
+                  <td className="px-1 py-1 md:px-6 md:py-4 text-white/60 text-xs hidden md:table-cell">
                     {new Date(app.createdAt).toLocaleDateString()}
                   </td>
-                  <td className="px-6 py-4 text-sm">
+                  <td className="px-1 py-1 md:px-6 md:py-4 text-xs">
                     <button
                       onClick={() => openModal(app)}
                       disabled={modalLoading}
-                      className="px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold rounded-lg transition-colors text-xs"
+                      className="px-2 py-1 md:px-4 md:py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold rounded transition-colors"
                     >
-                      View Details
+                      <span className="hidden sm:inline">View</span>
+                      <span className="sm:hidden">
+                        <i className="ri-eye-line"></i>
+                      </span>
                     </button>
                   </td>
                 </tr>
@@ -639,8 +652,9 @@ export default function PartnershipsTab() {
                           </div>
                         ) : (
                           <div className="bg-yellow-500/20 border border-yellow-500/50 rounded-lg p-4">
-                            <p className="text-xs text-yellow-300">
-                              ⏳ User is pending payment proof upload
+                            <p className="text-xs text-yellow-300 flex items-center gap-2">
+                              <i className="ri-hourglass-2-fill"></i>
+                              User is pending payment proof upload
                             </p>
                           </div>
                         )}
@@ -672,8 +686,9 @@ export default function PartnershipsTab() {
                         {selectedApp.paymentTracking
                           ?.userConvertedToPartner && (
                           <div className="bg-emerald-500/20 border border-emerald-500/50 rounded-lg p-4">
-                            <p className="text-xs text-emerald-300">
-                              ✓ User has been converted to partner
+                            <p className="text-xs text-emerald-300 flex items-center gap-2">
+                              <i className="ri-check-line"></i>
+                              User has been converted to partner
                             </p>
                           </div>
                         )}

@@ -1,29 +1,53 @@
 import { useAuth } from "@/context/useAuth";
+import { useNavigate, useLocation } from "react-router-dom";
 
 type Tab = "overview" | "users" | "partnerships" | "payments" | "contacts";
 
 interface Props {
-  active: Tab;
-  onChange: (tab: Tab) => void;
   collapsed: boolean;
   onToggle: () => void;
+  onNavigate?: () => void;
 }
 
 const navItems: { id: Tab; label: string; icon: string }[] = [
   { id: "overview", label: "Overview", icon: "ri-dashboard-line" },
   { id: "users", label: "Users", icon: "ri-team-line" },
-  { id: "partnerships", label: "Partnerships", icon: "ri-handshake-line" },
+  { id: "partnerships", label: "Partnerships", icon: "ri-shake-hands-line" },
   { id: "payments", label: "Payments", icon: "ri-bank-card-line" },
   { id: "contacts", label: "Contact Info", icon: "ri-phone-line" },
 ];
 
 export default function AdminSidebar({
-  active,
-  onChange,
   collapsed,
   onToggle,
+  onNavigate,
 }: Props) {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const getActiveTab = (): Tab => {
+    const path = location.pathname;
+    if (path === "/admin/users") return "users";
+    if (path === "/admin/partnerships") return "partnerships";
+    if (path === "/admin/payments") return "payments";
+    if (path === "/admin/contacts") return "contacts";
+    return "overview";
+  };
+
+  const handleNavigation = (tab: Tab) => {
+    const paths: Record<Tab, string> = {
+      overview: "/admin/overview",
+      users: "/admin/users",
+      partnerships: "/admin/partnerships",
+      payments: "/admin/payments",
+      contacts: "/admin/contacts",
+    };
+    navigate(paths[tab]);
+    onNavigate?.();
+  };
+
+  const active = getActiveTab();
 
   return (
     <aside
@@ -77,7 +101,7 @@ export default function AdminSidebar({
         {navItems.map((item) => (
           <button
             key={item.id}
-            onClick={() => onChange(item.id)}
+            onClick={() => handleNavigation(item.id)}
             title={collapsed ? item.label : undefined}
             className={`
               w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium

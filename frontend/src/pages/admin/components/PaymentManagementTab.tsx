@@ -206,21 +206,42 @@ export default function PaymentManagementTab() {
         <div className="flex flex-wrap gap-2">
           {[
             { value: "all", label: "All Applications" },
-            { value: "awaiting", label: "⏳ Awaiting Payment" },
-            { value: "payment_requested", label: "📋 Instructions Sent" },
-            { value: "proof_pending", label: "⏸️ Proof Pending" },
-            { value: "proof_ready", label: "✓ Proof Uploaded" },
-            { value: "received", label: "✅ Confirmed" },
+            {
+              value: "awaiting",
+              label: " Awaiting Payment",
+              icon: "ri-hourglass-2-fill",
+            },
+            {
+              value: "payment_requested",
+              label: " Instructions Sent",
+              icon: "ri-file-list-fill",
+            },
+            {
+              value: "proof_pending",
+              label: "Proof Pending",
+              icon: "ri-pause-circle-fill",
+            },
+            {
+              value: "proof_ready",
+              label: "Proof Uploaded",
+              icon: "ri-check-line",
+            },
+            {
+              value: "received",
+              label: "Confirmed",
+              icon: "ri-check-double-fill",
+            },
           ].map((filter) => (
             <button
               key={filter.value}
               onClick={() => setPaymentFilter(filter.value)}
-              className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+              className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 ${
                 paymentFilter === filter.value
                   ? "bg-amber-500 text-white"
                   : "bg-white/5 text-white/70 hover:bg-white/10"
               }`}
             >
+              {filter.icon && <i className={`ri-sm ${filter.icon}`}></i>}
               {filter.label}
             </button>
           ))}
@@ -247,25 +268,25 @@ export default function PaymentManagementTab() {
             <table className="w-full text-sm">
               <thead className="bg-white/5 border-b border-white/5">
                 <tr>
-                  <th className="px-6 py-4 text-left font-semibold text-white">
-                    Reference ID
+                  <th className="px-1 py-1 md:px-6 md:py-4 text-left font-semibold text-white hidden sm:table-cell text-xs">
+                    ID
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold text-white">
-                    Partner Name
+                  <th className="px-1 py-1 md:px-6 md:py-4 text-left font-semibold text-white text-xs">
+                    Partner
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold text-white">
+                  <th className="px-1 py-1 md:px-6 md:py-4 text-left font-semibold text-white hidden md:table-cell text-xs">
                     Investment
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold text-white">
-                    Payment Status
+                  <th className="px-1 py-1 md:px-6 md:py-4 text-left font-semibold text-white text-xs">
+                    Status
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold text-white">
+                  <th className="px-1 py-1 md:px-6 md:py-4 text-left font-semibold text-white hidden lg:table-cell text-xs">
                     Method
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold text-white">
+                  <th className="px-1 py-1 md:px-6 md:py-4 text-left font-semibold text-white hidden lg:table-cell text-xs">
                     Proof
                   </th>
-                  <th className="px-6 py-4 text-left font-semibold text-white">
+                  <th className="px-1 py-1 md:px-6 md:py-4 text-left font-semibold text-white text-xs">
                     Action
                   </th>
                 </tr>
@@ -276,63 +297,70 @@ export default function PaymentManagementTab() {
                     key={app._id}
                     className="border-b border-white/5 hover:bg-white/5 transition-colors"
                   >
-                    <td className="px-6 py-4 text-white font-mono text-xs">
-                      {app.referenceId}
+                    <td className="px-1 py-1 md:px-6 md:py-4 text-white font-mono text-xs hidden sm:table-cell truncate">
+                      {app.referenceId.slice(-8)}
                     </td>
-                    <td className="px-6 py-4 text-white">
-                      <div>
-                        <p className="font-semibold">
+                    <td className="px-1 py-1 md:px-6 md:py-4 text-white text-xs">
+                      <div className="truncate max-w-xs">
+                        <p className="font-semibold text-xs truncate">
                           {app.partnerInfo.fullLegalName}
                         </p>
-                        <p className="text-white/60 text-xs">
+                        <p className="text-white/60 text-xs hidden md:block truncate">
                           {app.partnerInfo.email}
                         </p>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-white font-semibold">
+                    <td className="px-1 py-1 md:px-6 md:py-4 text-white font-semibold text-xs hidden md:table-cell">
                       {formatCurrency(app.investmentAmount)}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-1 py-1 md:px-6 md:py-4">
                       <span
-                        className={`inline-flex items-center gap-1 px-3 py-1 rounded-full border text-xs font-semibold ${getPaymentStatusColor(
+                        className={`inline-flex items-center gap-0.5 px-1 py-0.5 rounded border text-xs font-semibold ${getPaymentStatusColor(
                           app.paymentTracking.status,
                         )}`}
                       >
-                        {getStatusLabel(app.paymentTracking.status)}
+                        <span className="hidden sm:inline">
+                          {getStatusLabel(app.paymentTracking.status)}
+                        </span>
+                        <span className="sm:hidden">
+                          {getStatusLabel(app.paymentTracking.status).charAt(0)}
+                        </span>
                       </span>
                     </td>
-                    <td className="px-6 py-4 text-white/80 text-xs">
+                    <td className="px-1 py-1 md:px-6 md:py-4 text-white/80 text-xs hidden lg:table-cell truncate">
                       {app.paymentTracking.requestedPaymentMethod ? (
-                        <span className="capitalize">
-                          {app.paymentTracking.requestedPaymentMethod.replace(
-                            /_/g,
-                            " ",
-                          )}
+                        <span className="capitalize text-xs">
+                          {app.paymentTracking.requestedPaymentMethod
+                            .replace(/_/g, " ")
+                            .slice(0, 10)}
                         </span>
                       ) : (
                         <span className="text-white/40">—</span>
                       )}
                     </td>
-                    <td className="px-6 py-4 text-white/80 text-xs">
+                    <td className="px-1 py-1 md:px-6 md:py-4 text-white/80 text-xs hidden lg:table-cell">
                       {app.paymentTracking.paymentProofUrl ? (
                         <a
                           href={app.paymentTracking.paymentProofUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-emerald-400 hover:text-emerald-300 underline"
+                          className="text-emerald-400 hover:text-emerald-300"
                         >
-                          <i className="ri-file-download-line mr-1"></i>View
+                          <i className="ri-file-download-line"></i>
                         </a>
                       ) : (
                         <span className="text-white/40">—</span>
                       )}
                     </td>
-                    <td className="px-6 py-4">
+                    <td className="px-1 py-1 md:px-6 md:py-4">
                       <button
                         onClick={() => openModal(app)}
-                        className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded-lg transition-colors"
+                        className="px-2 py-1 md:px-3 md:py-1 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold rounded transition-colors"
                       >
-                        Manage
+                        <span className="hidden sm:inline">Manage</span>
+                        <span className="sm:hidden">
+                          <i className="ri-settings-line"></i>
+                        </span>
                       </button>
                     </td>
                   </tr>
@@ -456,8 +484,9 @@ export default function PaymentManagementTab() {
 
                   {selectedApp.paymentTracking.paymentProofUrl ? (
                     <div className="bg-emerald-500/20 border border-emerald-500/50 rounded-lg p-4 space-y-2">
-                      <p className="text-emerald-300 font-semibold text-sm">
-                        ✓ Payment Proof Uploaded
+                      <p className="text-emerald-300 font-semibold text-sm flex items-center gap-2">
+                        <i className="ri-check-line"></i>
+                        Payment Proof Uploaded
                       </p>
                       <a
                         href={selectedApp.paymentTracking.paymentProofUrl}

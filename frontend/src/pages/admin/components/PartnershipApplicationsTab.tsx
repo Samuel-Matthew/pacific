@@ -181,7 +181,7 @@ export default function PartnershipApplicationsTab() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h3 className="text-xl font-bold text-gray-800">
+        <h3 className="text-xl font-bold text-white">
           Partnership Applications
         </h3>
         <button
@@ -198,7 +198,7 @@ export default function PartnershipApplicationsTab() {
         <div className="flex justify-center items-center py-12">
           <div className="text-center">
             <i className="ri-loader-4-line animate-spin text-3xl text-blue-600 mb-2"></i>
-            <p className="text-gray-600">Loading applications...</p>
+            <p className="text-white/60">Loading applications...</p>
           </div>
         </div>
       ) : errorMessage ? (
@@ -212,51 +212,51 @@ export default function PartnershipApplicationsTab() {
           </button>
         </div>
       ) : applications.length === 0 ? (
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-8 text-center">
-          <i className="ri-inbox-line text-4xl text-gray-400 mb-4 block"></i>
-          <p className="text-gray-600">No partnership applications yet.</p>
+        <div className="bg-slate-900/50 border border-gray-200 rounded-lg p-8 text-center">
+          <i className="ri-inbox-line text-4xl text-white/40 mb-4 block"></i>
+          <p className="text-white/60">No partnership applications yet.</p>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow overflow-x-auto">
+        <div className="bg-slate-900/50 border border-gray-200 rounded-lg shadow overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b">
+            <thead className="bg-gray-50 border-b border-gray-200">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">
                   Partner Name
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
                   Email
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
                   Investment
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
                   App Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
                   Payment Status
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
                   Date
                 </th>
-                <th className="px-6 py-3 text-left text-xs font-bold text-gray-700 uppercase">
+                <th className="px-6 py-3 text-left text-xs font-bold text-white/70 uppercase">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y">
+            <tbody className="divide-y divide-white/10">
               {applications.map((app) => (
                 <tr
                   key={app._id}
-                  className="hover:bg-gray-50 transition-colors"
+                  className="hover:bg-white/5 transition-colors"
                 >
-                  <td className="px-6 py-4 text-sm font-semibold text-gray-900">
+                  <td className="px-6 py-4 text-sm font-semibold text-white">
                     {app.partnerInfo.fullLegalName}
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
+                  <td className="px-6 py-4 text-sm text-white/60">
                     {app.partnerInfo.email}
                   </td>
-                  <td className="px-6 py-4 text-sm font-bold text-amber-600">
+                  <td className="px-6 py-4 text-sm font-bold text-amber-400">
                     {formatCurrency(app.investmentAmount)}
                   </td>
                   <td className="px-6 py-4 text-sm">
@@ -277,7 +277,7 @@ export default function PartnershipApplicationsTab() {
                       {app.paymentTracking.status.replace("_", " ")}
                     </span>
                   </td>
-                  <td className="px-6 py-4 text-sm text-gray-600">
+                  <td className="px-6 py-4 text-sm text-white/60">
                     {new Date(app.createdAt).toLocaleDateString()}
                   </td>
                   <td className="px-6 py-4 text-sm">
@@ -299,9 +299,9 @@ export default function PartnershipApplicationsTab() {
       {/* Detail Modal */}
       {modalOpen && selectedApp && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="sticky top-0 bg-white border-b border-gray-200 p-6 flex items-center justify-between">
-              <h2 className="text-xl font-bold text-gray-900">
+          <div className="bg-white rounded-lg max-w-md md:max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-gray-200 p-4 md:p-6 flex items-center justify-between">
+              <h2 className="text-lg md:text-xl font-bold text-gray-900">
                 Application Details
               </h2>
               <button
@@ -312,9 +312,9 @@ export default function PartnershipApplicationsTab() {
               </button>
             </div>
 
-            <div className="p-6 space-y-6">
+            <div className="p-4 md:p-6 space-y-6">
               {/* Reference ID & Status */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-gray-50 p-4 rounded-lg">
                   <p className="text-xs text-gray-600 mb-1">Reference ID</p>
                   <p className="font-bold text-gray-900">
@@ -338,7 +338,7 @@ export default function PartnershipApplicationsTab() {
                 <h3 className="font-bold text-gray-900 mb-4">
                   Partner Information
                 </h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <p className="text-xs text-gray-600 mb-1">
                       Full Legal Name
@@ -349,7 +349,7 @@ export default function PartnershipApplicationsTab() {
                   </div>
                   <div>
                     <p className="text-xs text-gray-600 mb-1">Email</p>
-                    <p className="font-semibold text-gray-900">
+                    <p className="font-semibold text-gray-900 truncate">
                       {selectedApp.partnerInfo.email}
                     </p>
                   </div>
@@ -373,7 +373,7 @@ export default function PartnershipApplicationsTab() {
                 <h3 className="font-bold text-gray-900 mb-3">
                   Investment Information
                 </h3>
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                   <div>
                     <p className="text-xs text-gray-600 mb-1">Amount</p>
                     <p className="text-xl font-bold text-amber-600">

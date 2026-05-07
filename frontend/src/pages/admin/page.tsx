@@ -38,8 +38,6 @@ export default function AdminPage() {
     <div className="min-h-screen bg-slate-950 flex">
       {/* Sidebar */}
       <AdminSidebar
-        active={tab}
-        onChange={setTab}
         collapsed={collapsed}
         onToggle={() => setCollapsed((c) => !c)}
       />

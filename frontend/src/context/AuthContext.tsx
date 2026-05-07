@@ -8,10 +8,12 @@ export interface User {
   avatar?: string;
   role?: string;
   status?: string;
+  isPartner?: boolean;
 }
 
 interface AuthContextType {
   user: User | null;
+  setUser: (user: User | null) => void;
   isInitialized: boolean;
   login: (
     email: string,
@@ -215,10 +217,21 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setShowForgotPassword(false);
   };
 
+  // Helper function to update user and persist to sessionStorage
+  const updateUserState = (newUser: User | null) => {
+    if (newUser) {
+      sessionStorage.setItem(CURRENT_KEY, JSON.stringify(newUser));
+    } else {
+      sessionStorage.removeItem(CURRENT_KEY);
+    }
+    setUser(newUser);
+  };
+
   return (
     <AuthContext.Provider
       value={{
         user,
+        setUser: updateUserState,
         isInitialized,
         login,
         signup,

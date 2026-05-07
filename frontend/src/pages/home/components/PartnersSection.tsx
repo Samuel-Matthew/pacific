@@ -368,28 +368,7 @@ export default function PartnersSection() {
                 </div>
               </div>
 
-              {/* Signal Contact */}
-              <div className="pt-4 border-t border-gray-100 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-                <div className="flex items-center gap-2">
-                  <div className="w-7 h-7 flex items-center justify-center rounded-full bg-[#3a76f0]/10 flex-shrink-0">
-                    <i className="ri-signal-tower-line text-[#3a76f0] text-sm"></i>
-                  </div>
-                  <div>
-                    <p className="text-[#6b6b6b] text-[10px]">Signal</p>
-                    <p className="text-[#1a1a1a] text-xs font-semibold">
-                      {SIGNAL_NUMBER}
-                    </p>
-                  </div>
-                </div>
-                <a
-                  href={SIGNAL_LINK}
-                  target="_blank"
-                  rel="nofollow noreferrer"
-                  className="w-full sm:w-auto text-center px-4 py-2 bg-[#3a76f0] text-white text-xs font-semibold rounded-full hover:bg-[#2d63d4] transition-colors cursor-pointer whitespace-nowrap"
-                >
-                  Message on Signal
-                </a>
-              </div>
+          
             </div>
           </div>
         </div>

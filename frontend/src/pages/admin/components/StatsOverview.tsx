@@ -7,6 +7,7 @@ interface StatCard {
   icon: string;
   color: string;
   bg: string;
+  textColor: string;
   trend?: string;
 }
 
@@ -31,33 +32,37 @@ export default function StatsOverview() {
         {
           label: "Total Users",
           value: stats.totalUsers.toLocaleString(),
-          icon: "👥",
+          icon: "ri-team-fill",
           color: "text-blue-400",
-          bg: "from-blue-500/20 to-blue-600/10 border-blue-500/30",
+          textColor: "text-blue-300",
+          bg: "bg-blue-500/10 border-blue-500/30",
           trend: `+${stats.newUsersThisMonth} this month`,
         },
         {
           label: "Active Users",
           value: stats.activeUsers.toLocaleString(),
-          icon: "✅",
+          icon: "ri-check-double-fill",
           color: "text-emerald-400",
-          bg: "from-emerald-500/20 to-emerald-600/10 border-emerald-500/30",
+          textColor: "text-emerald-300",
+          bg: "bg-emerald-500/10 border-emerald-500/30",
           trend: `${stats.totalUsers > 0 ? Math.round((stats.activeUsers / stats.totalUsers) * 100) : 0}% of total`,
         },
         {
           label: "Partnerships",
           value: stats.totalPartnerships.toLocaleString(),
-          icon: "🤝",
+          icon: "ri-handshake-2-fill",
           color: "text-amber-400",
-          bg: "from-amber-500/20 to-amber-600/10 border-amber-500/30",
+          textColor: "text-amber-300",
+          bg: "bg-amber-500/10 border-amber-500/30",
           trend: `${stats.approvedPartnerships} approved`,
         },
         {
           label: "Pending Reviews",
           value: stats.pendingPartnerships.toLocaleString(),
-          icon: "⏳",
+          icon: "ri-hourglass-2-fill",
           color: "text-orange-400",
-          bg: "from-orange-500/20 to-orange-600/10 border-orange-500/30",
+          textColor: "text-orange-300",
+          bg: "bg-orange-500/10 border-orange-500/30",
           trend: "Awaiting action",
         },
       ]
@@ -65,7 +70,7 @@ export default function StatsOverview() {
 
   return (
     <div>
-      <h2 className="text-white/70 text-sm font-semibold uppercase tracking-widest mb-4">
+      <h2 className="text-white text-sm font-semibold uppercase tracking-widest mb-4">
         Overview
       </h2>
 
@@ -80,7 +85,7 @@ export default function StatsOverview() {
           ? Array.from({ length: 4 }).map((_, i) => (
               <div
                 key={i}
-                className="rounded-2xl bg-white/5 border border-white/10 p-5 animate-pulse"
+                className="rounded-2xl bg-slate-800 border border-white/10 p-5 animate-pulse"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-10 h-10 rounded-xl bg-white/10" />
@@ -93,18 +98,20 @@ export default function StatsOverview() {
           : cards.map((card) => (
               <div
                 key={card.label}
-                className={`rounded-2xl bg-gradient-to-br ${card.bg} border p-5 group hover:scale-[1.02] transition-transform duration-200`}
+                className={`rounded-2xl ${card.bg} border p-5 group hover:scale-[1.02] transition-transform duration-200`}
               >
                 <div className="flex items-center justify-between mb-4">
-                  <div className="text-2xl">{card.icon}</div>
-                  <span className={`text-xs font-medium ${card.color} bg-white/5 px-2 py-1 rounded-full`}>
+                  <i className={`ri-lg ${card.icon} ${card.color}`}></i>
+                  <span
+                    className={`text-xs font-medium ${card.color} bg-white/5 px-2 py-1 rounded-full`}
+                  >
                     {card.trend}
                   </span>
                 </div>
                 <p className={`text-3xl font-bold ${card.color} mb-1`}>
                   {loading ? <Skeleton /> : card.value}
                 </p>
-                <p className="text-slate-400 text-sm">{card.label}</p>
+                <p className="text-white/60 text-sm">{card.label}</p>
               </div>
             ))}
       </div>
