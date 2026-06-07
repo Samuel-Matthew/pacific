@@ -111,6 +111,36 @@ export const createApplication = async (req, res) => {
   }
 };
 
+// Check if user has submitted an application or is already a partner
+export const checkApplicationStatus = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const isPartner = req.user.isPartner;
+
+    // Check if user has any partnership application (regardless of status)
+    const application = await PartnershipService.getUserApplication(userId);
+    const hasApplication = !!application;
+
+    res.status(200).json({
+      success: true,
+      data: {
+        hasApplication,
+        isPartner,
+      },
+    });
+  } catch (error) {
+    // If no application found, that's not an error for this endpoint
+    const isPartner = req.user.isPartner;
+    res.status(200).json({
+      success: true,
+      data: {
+        hasApplication: false,
+        isPartner,
+      },
+    });
+  }
+};
+
 // Get user's application
 export const getUserApplication = async (req, res) => {
   try {

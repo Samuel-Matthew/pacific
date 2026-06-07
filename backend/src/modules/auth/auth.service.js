@@ -174,21 +174,26 @@ export const logoutAllSessions = async (userId) => {
 */
 
 export const forgotPassword = async ({ email }) => {
+  console.log("🔍 [AUTH SERVICE] Finding user with email:", email);
   const user = await User.findOne({ email });
 
   if (!user) {
+    console.log("ℹ️ [AUTH SERVICE] User not found for email:", email);
     // Don't reveal if email exists (security best practice)
     return { message: "If email exists, reset link will be sent" };
   }
 
+  console.log("✅ [AUTH SERVICE] User found:", user.name, "- Generating reset token");
   // Generate reset token
   const resetToken = generatePasswordResetToken();
   const hashedToken = hashToken(resetToken);
+  console.log("🔐 [AUTH SERVICE] Token generated (unhashed length: " + resetToken.length + ", hashed length: " + hashedToken.length + ")");
 
   // Save hashed token and expiry to user document
   user.resetPasswordToken = hashedToken;
   user.resetPasswordExpiry = getPasswordResetTokenExpiry();
   await user.save();
+  console.log("💾 [AUTH SERVICE] Reset token saved to database with expiry");
 
   return {
     message: "Password reset link sent",
@@ -208,18 +213,23 @@ export const resetPassword = async ({
   newPassword,
   confirmPassword,
 }) => {
+  console.log("🔐 [AUTH SERVICE - RESET] Processing password reset");
+  
   // Validate passwords match
   if (newPassword !== confirmPassword) {
+    console.warn("⚠️ [AUTH SERVICE - RESET] Passwords do not match");
     throw new Error("Passwords do not match");
   }
 
   // Validate password strength
   if (newPassword.length < 8) {
+    console.warn("⚠️ [AUTH SERVICE - RESET] Password too weak (< 8 chars)");
     throw new Error("Password must be at least 8 characters");
   }
 
   // Hash the token to match against DB
   const hashedToken = hashToken(token);
+  console.log("🔍 [AUTH SERVICE - RESET] Looking up user with matching reset token");
 
   // Find user with matching reset token
   const user = await User.findOne({
@@ -228,14 +238,17 @@ export const resetPassword = async ({
   });
 
   if (!user) {
+    console.warn("❌ [AUTH SERVICE - RESET] Invalid or expired reset token");
     throw new Error("Invalid or expired reset token");
   }
 
+  console.log("✅ [AUTH SERVICE - RESET] User found:", user.name, "- Updating password");
   // Update password and clear reset token fields
   user.password = newPassword; // Will be hashed by pre-save hook
   user.resetPasswordToken = undefined;
   user.resetPasswordExpiry = undefined;
   await user.save();
+  console.log("✅ [AUTH SERVICE - RESET] Password updated and token cleared for user:", user.name);
 
   return { message: "Password reset successfully" };
 };

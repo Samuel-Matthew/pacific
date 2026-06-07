@@ -8,7 +8,7 @@ import {
   type AdminUser,
 } from "@/api/admin";
 
-const ROLES = ["user", "admin", "moderator"];
+const ROLES = ["user", "admin"];
 const STATUSES = ["active", "suspended", "banned"];
 
 export default function UsersTab() {
@@ -266,7 +266,7 @@ export default function UsersTab() {
                         className="text-white/50 hover:text-red-400 transition-colors p-1.5 rounded-lg hover:bg-red-500/10 h-8 w-8 flex items-center justify-center"
                         title="Delete user"
                       >
-                        <i className="ri-delete-bin-line\"></i>
+                        <i className="ri-delete-bin-line"></i>
                       </button>
                     </td>
                   </tr>

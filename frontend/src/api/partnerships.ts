@@ -1,5 +1,15 @@
 import axiosInstance from "./config";
 
+// Check if user has application or is partner
+export const checkApplicationStatus = async () => {
+  try {
+    const response = await axiosInstance.get("/partnerships/check-status");
+    return response.data;
+  } catch (error: any) {
+    throw error.response?.data || error;
+  }
+};
+
 // User endpoints
 export const createPartnershipApplication = async (
   applicationData: any,

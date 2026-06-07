@@ -204,8 +204,10 @@ export const logoutAll = async (req, res, next) => {
 export const forgotPasswordHandler = async (req, res, next) => {
   try {
     const { email } = req.body;
+    console.log("🔐 [FORGOT PASSWORD] Request received for email:", email);
 
     if (!email) {
+      console.warn("⚠️ [FORGOT PASSWORD] Email is required");
       return res
         .status(400)
         .json({ success: false, message: "Email is required" });
@@ -215,7 +217,9 @@ export const forgotPasswordHandler = async (req, res, next) => {
 
     // If user exists and reset token was generated, send email
     if (result.resetToken) {
+      console.log("✅ [FORGOT PASSWORD] Token generated for user:", result.user?.name);
       const resetLink = `${process.env.FRONTEND_URL}/reset-password?token=${result.resetToken}`;
+      console.log("🔗 [FORGOT PASSWORD] Reset link:", resetLink);
       const contactInfo = await EmailService.getContactInfo();
 
       const htmlContent = passwordResetTemplate({
@@ -224,12 +228,16 @@ export const forgotPasswordHandler = async (req, res, next) => {
         contactInfo,
       });
 
+      console.log("📧 [FORGOT PASSWORD] Sending email to:", email);
       await EmailService.sendEmail({
         recipientEmail: email,
         recipientName: result.user.name,
         subject: "Password Reset Request - Pacific Crown Motors Partnership",
         htmlContent,
       });
+      console.log("✅ [FORGOT PASSWORD] Email sent successfully to:", email);
+    } else {
+      console.log("ℹ️ [FORGOT PASSWORD] No user found for email (security: generic response):", email);
     }
 
     // Always return generic success to prevent email enumeration attacks
@@ -239,7 +247,7 @@ export const forgotPasswordHandler = async (req, res, next) => {
         "If an account exists with that email, a password reset link has been sent.",
     });
   } catch (error) {
-    console.error("Forgot password error:", error.message || error);
+    console.error("❌ [FORGOT PASSWORD] Error:", error.message || error);
     next(error);
   }
 };
@@ -253,15 +261,22 @@ export const forgotPasswordHandler = async (req, res, next) => {
 export const resetPasswordHandler = async (req, res, next) => {
   try {
     const { token, newPassword, confirmPassword } = req.body;
+    console.log("🔐 [RESET PASSWORD] Request received");
+    console.log("   - Token provided:", !!token ? "Yes (length: " + token.length + ")" : "No");
+    console.log("   - Password length:", newPassword?.length || 0);
+    console.log("   - Confirm password length:", confirmPassword?.length || 0);
 
     if (!token || !newPassword || !confirmPassword) {
+      console.warn("⚠️ [RESET PASSWORD] Missing required fields");
       return res.status(400).json({
         success: false,
         message: "Token and passwords are required",
       });
     }
 
+    console.log("✅ [RESET PASSWORD] All fields provided, processing reset...");
     await resetPassword({ token, newPassword, confirmPassword });
+    console.log("✅ [RESET PASSWORD] Password reset successfully");
 
     res.json({
       success: true,
@@ -269,7 +284,7 @@ export const resetPasswordHandler = async (req, res, next) => {
         "Password reset successfully. You can now login with your new password.",
     });
   } catch (error) {
-    console.error("Reset password error:", error.message || error);
+    console.error("❌ [RESET PASSWORD] Error:", error.message || error);
     next(error);
   }
 };

@@ -202,12 +202,12 @@ export default function HeroSection() {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10 hidden md:flex">
+      {/* <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 z-10 hidden md:flex">
         <span className="text-white/40 text-xs tracking-widest uppercase">
           Scroll
         </span>
         <div className="w-px h-8 bg-gradient-to-b from-white/40 to-transparent"></div>
-      </div>
+      </div> */}
     </section>
   );
 }

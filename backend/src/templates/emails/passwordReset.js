@@ -1,4 +1,6 @@
-export const passwordResetTemplate = ({ recipientName, resetLink }) => `
+import { generateContactHTML } from "./contactHelper.js";
+
+export const passwordResetTemplate = ({ recipientName, resetLink, contactInfo }) => `
 <!DOCTYPE html>
 <html>
 <head>

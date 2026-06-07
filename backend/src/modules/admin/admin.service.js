@@ -64,8 +64,20 @@ export const getUsers = async (page = 1, limit = 10, filters = {}) => {
   const total = await User.countDocuments(query);
   const totalPages = Math.ceil(total / limit);
 
+  // Transform users to map _id to id
+  const transformedUsers = users.map((user) => ({
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    status: user.status,
+    avatar: user.avatar,
+    createdAt: user.createdAt,
+    lastLogin: user.lastLogin,
+  }));
+
   return {
-    data: users,
+    data: transformedUsers,
     total,
     page,
     limit,
@@ -80,7 +92,7 @@ export const getUsers = async (page = 1, limit = 10, filters = {}) => {
 */
 
 export const updateUserRole = async (userId, role) => {
-  const validRoles = ["user", "admin", "moderator"];
+  const validRoles = ["user", "admin"];
   if (!validRoles.includes(role)) {
     throw Object.assign(new Error("Invalid role"), { statusCode: 400 });
   }
@@ -95,7 +107,16 @@ export const updateUserRole = async (userId, role) => {
     throw Object.assign(new Error("User not found"), { statusCode: 404 });
   }
 
-  return user;
+  return {
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    status: user.status,
+    avatar: user.avatar,
+    createdAt: user.createdAt,
+    lastLogin: user.lastLogin,
+  };
 };
 
 /*
@@ -120,7 +141,16 @@ export const updateUserStatus = async (userId, status) => {
     throw Object.assign(new Error("User not found"), { statusCode: 404 });
   }
 
-  return user;
+  return {
+    id: user._id.toString(),
+    name: user.name,
+    email: user.email,
+    role: user.role,
+    status: user.status,
+    avatar: user.avatar,
+    createdAt: user.createdAt,
+    lastLogin: user.lastLogin,
+  };
 };
 
 /*

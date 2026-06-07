@@ -106,7 +106,7 @@ export default function Navbar() {
             <img
               src="https://public.readdy.ai/ai/img_res/70154d1f-be8f-47cc-a064-4284bd76349f.png"
               alt="Pacific Crowns Logo"
-              className="h-10 md:h-12 w-auto object-contain"
+              className="h-20 md:h-20 w-auto object-contain"
             />
           </button>
 

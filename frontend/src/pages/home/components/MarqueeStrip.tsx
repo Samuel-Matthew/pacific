@@ -12,11 +12,11 @@ const items = [
 export default function MarqueeStrip() {
   return (
     <div className="bg-[#d4af37] py-3 overflow-hidden">
-      <div className="flex animate-[marquee_30s_linear_infinite] whitespace-nowrap">
+      <div className="flex animate-marquee">
         {[...items, ...items].map((item, i) => (
           <span
             key={i}
-            className="inline-flex items-center gap-3 px-6 text-[#1a1a1a] text-sm font-semibold"
+            className="inline-flex items-center gap-3 px-6 text-[#1a1a1a] text-sm font-semibold flex-shrink-0"
           >
             <i className="ri-star-fill text-[#1a1a1a]/40 text-xs"></i>
             {item}

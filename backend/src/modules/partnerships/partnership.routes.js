@@ -17,6 +17,13 @@ router.post(
   PartnershipController.createApplication,
 );
 
+// Check if user has application or is partner (authenticated users)
+router.get(
+  "/check-status",
+  protect,
+  PartnershipController.checkApplicationStatus,
+);
+
 // Get user's own application (authenticated users)
 router.get(
   "/my-application",

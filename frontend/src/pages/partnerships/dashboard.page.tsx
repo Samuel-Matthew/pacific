@@ -5,6 +5,7 @@ import {
   requestPaymentMethod,
   uploadPaymentProof,
   updateAccountDetails,
+  checkApplicationStatus,
 } from "@/api/partnerships";
 import { getContactInfo } from "@/api/contactInfo";
 import type { ContactInfo } from "@/api/contactInfo";
@@ -107,6 +108,31 @@ export default function DashboardPage() {
   useEffect(() => {
     fetchApplication();
   }, []);
+
+  // Verify access on component mount (redundant security check)
+  useEffect(() => {
+    const verifyAccess = async () => {
+      try {
+        const response = await checkApplicationStatus();
+        if (response.success) {
+          const { hasApplication, isPartner } = response.data;
+          // If user no longer has application and is not a partner, redirect
+          if (!hasApplication && !isPartner) {
+            navigate("/#partnerships", { replace: true });
+          }
+        } else {
+          // On error, redirect for security
+          navigate("/#partnerships", { replace: true });
+        }
+      } catch (error) {
+        console.error("Error verifying partnership access:", error);
+        // On error, redirect for security
+        navigate("/#partnerships", { replace: true });
+      }
+    };
+
+    verifyAccess();
+  }, [navigate]);
 
   // Visibility API listener - refetch data when tab becomes visible
   useEffect(() => {

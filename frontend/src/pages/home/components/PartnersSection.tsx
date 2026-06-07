@@ -367,8 +367,6 @@ export default function PartnersSection() {
                   ))}
                 </div>
               </div>
-
-          
             </div>
           </div>
         </div>
@@ -564,7 +562,7 @@ export default function PartnersSection() {
                   </div>
                   <input
                     type="range"
-                    min="55000"
+                    min="5000"
                     max="500000"
                     step="5000"
                     value={shareAmount}
@@ -572,7 +570,7 @@ export default function PartnersSection() {
                     className="w-full h-2 bg-white/20 rounded-full appearance-none cursor-pointer accent-[#d4af37]"
                   />
                   <div className="flex justify-between text-white/40 text-[10px] mt-1.5 sm:mt-2">
-                    <span>$55K</span>
+                    <span>$5K</span>
                     <span>$500K</span>
                   </div>
                 </div>
@@ -1073,13 +1071,13 @@ export default function PartnersSection() {
                     Draw your signature below using your mouse or finger.
                   </p>
                 </div>
-                <div className="p-4 sm:p-5 bg-white">
+                <div className="p-3 sm:p-5 bg-white">
                   <div className="border-2 border-dashed border-gray-300 rounded-xl overflow-hidden bg-[#fafafa]">
                     <canvas
                       ref={canvasRef}
                       width={560}
-                      height={100}
-                      className="w-full touch-none cursor-crosshair"
+                      height={150}
+                      className="w-full touch-none cursor-crosshair sm:h-[150px] h-[150px]"
                       onMouseDown={startDraw}
                       onMouseMove={draw}
                       onMouseUp={stopDraw}

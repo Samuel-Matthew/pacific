@@ -2,6 +2,7 @@ import type { RouteObject } from "react-router-dom";
 import { lazy } from "react";
 import NotFound from "../pages/NotFound";
 import Home from "../pages/home/page";
+import { ProtectedPartnershipRoute } from "../components/ProtectedPartnershipRoute";
 
 const PartnershipDashboardPage = lazy(
   () => import("../pages/partnerships/dashboard.page"),
@@ -24,7 +25,11 @@ const routes: RouteObject[] = [
   },
   {
     path: "/partnerships/dashboard",
-    element: <PartnershipDashboardPage />,
+    element: (
+      <ProtectedPartnershipRoute>
+        <PartnershipDashboardPage />
+      </ProtectedPartnershipRoute>
+    ),
   },
   {
     path: "/admin",

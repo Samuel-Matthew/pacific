@@ -43,23 +43,15 @@ export default function Footer() {
     loadContactInfo();
   }, []);
 
-  const handleSubscribe = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubscribe = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!email) return;
     setLoading(true);
-    const data = new URLSearchParams({ email });
-    try {
-      await fetch("https://readdy.ai/api/form/d7ahuu9nauq9gnuqnj7g", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: data.toString(),
-      });
+    setTimeout(() => {
       setSubscribed(true);
-    } catch {
-      setSubscribed(true);
-    } finally {
+      setEmail("");
       setLoading(false);
-    }
+    }, 1000);
   };
 
   const scrollTo = (href: string) => {
@@ -77,7 +69,7 @@ export default function Footer() {
             <img
               src="https://public.readdy.ai/ai/img_res/70154d1f-be8f-47cc-a064-4284bd76349f.png"
               alt="Pacific Crowns Logo"
-              className="h-12 w-auto object-contain mb-5"
+              className="h-20 w-auto object-contain mb-5"
             />
             <p className="text-white/50 text-sm leading-relaxed mb-6">
               Pacific Crowns is your premier destination for luxury and premium
@@ -153,7 +145,7 @@ export default function Footer() {
               </div>
             ) : (
               <form
-                data-readdy-form
+                // data-readdy-form
                 id="newsletter-form"
                 onSubmit={handleSubscribe}
                 className="flex flex-col gap-3"
